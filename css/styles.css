@@ -352,7 +352,7 @@ body {
   view-transition-name: foto;
   opacity: 0;
   transform: scale(0.88);
-  animation: photo-in 0.9s var(--ease-out) 1.2s forwards;
+  animation: photo-in 0.9s var(--ease-out) 0.8s forwards;
 }
 
 .photo {
@@ -379,6 +379,13 @@ body {
   opacity: 0;
   transform: translateY(12px);
   animation: fade-up 0.7s var(--ease-out) 1.55s forwards;
+}
+
+.card.entered .photo-wrap,
+.card.entered .date {
+  animation: none;
+  opacity: 1;
+  transform: none;
 }
 
 /* Venue details */
