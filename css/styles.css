@@ -1,0 +1,730 @@
+/* Mis XV Años — Amelia invitation */
+
+@property --rest-rot {
+  syntax: "<angle>";
+  inherits: true;
+  initial-value: 0deg;
+}
+
+:root {
+  --ink: #3d5260;
+  --ink-soft: #5a7384;
+  --sage: #9bb5a6;
+  --blue-wash: rgba(154, 184, 200, 0.35);
+  --blue-wash-deep: rgba(122, 158, 176, 0.28);
+  --paper: #f7f8f6;
+  --paper-edge: #eef1ef;
+  --border-photo: #9eb3bd;
+  --card-w: min(100vw, 430px);
+  --card-h: min(100dvh, 800px);
+  --ease-out: cubic-bezier(0.22, 1, 0.36, 1);
+  --vt-duration: 780ms;
+}
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html,
+body {
+  height: 100%;
+}
+
+body {
+  font-family: "Cinzel", "Times New Roman", serif;
+  color: var(--ink);
+  background:
+    radial-gradient(ellipse at 20% 10%, rgba(180, 205, 215, 0.25), transparent 50%),
+    radial-gradient(ellipse at 80% 90%, rgba(170, 195, 185, 0.2), transparent 45%),
+    linear-gradient(160deg, #e8eef0 0%, #f2f4f2 40%, #e6ebe8 100%);
+  display: grid;
+  place-items: center;
+  min-height: 100dvh;
+  overflow: hidden;
+  -webkit-font-smoothing: antialiased;
+}
+
+.page {
+  width: 100%;
+  height: 100dvh;
+  display: grid;
+  place-items: center;
+  padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+
+/* ——— Card ——— */
+.card {
+  position: relative;
+  width: min(100vw, 430px, calc(100dvh * 447 / 795));
+  aspect-ratio: 447 / 795;
+  max-height: 100dvh;
+  background-color: var(--paper);
+  background-image:
+    url("data:image/svg+xml,%3Csvg viewBox='0 0 200 200' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.85' numOctaves='4' stitchTiles='stitch'/%3E%3CfeColorMatrix type='saturate' values='0'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='0.06'/%3E%3C/svg%3E");
+  border-radius: 4px;
+  box-shadow:
+    0 1px 2px rgba(60, 80, 90, 0.06),
+    0 18px 48px rgba(60, 80, 90, 0.14);
+  overflow: hidden;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  outline: none;
+}
+
+.card:focus-visible {
+  box-shadow:
+    0 0 0 3px rgba(158, 179, 189, 0.6),
+    0 18px 48px rgba(60, 80, 90, 0.14);
+}
+
+/* ——— Watercolor washes ——— */
+.wash {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(28px);
+  pointer-events: none;
+  z-index: 0;
+}
+
+.wash-tl {
+  width: 55%;
+  height: 32%;
+  top: -8%;
+  left: -12%;
+  background: var(--blue-wash);
+}
+
+.wash-tr {
+  width: 45%;
+  height: 28%;
+  top: -5%;
+  right: -10%;
+  background: var(--blue-wash-deep);
+}
+
+.wash-bl {
+  width: 50%;
+  height: 30%;
+  bottom: -8%;
+  left: -14%;
+  background: var(--blue-wash-deep);
+}
+
+.wash-br {
+  width: 48%;
+  height: 28%;
+  bottom: -6%;
+  right: -12%;
+  background: var(--blue-wash);
+}
+
+.glitter {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  z-index: 1;
+  opacity: 0.55;
+  background-image:
+    radial-gradient(1px 1px at 12% 18%, rgba(140, 160, 175, 0.7), transparent),
+    radial-gradient(1.5px 1.5px at 22% 12%, rgba(160, 180, 195, 0.55), transparent),
+    radial-gradient(1px 1px at 78% 15%, rgba(140, 160, 175, 0.65), transparent),
+    radial-gradient(1px 1px at 88% 22%, rgba(150, 170, 185, 0.5), transparent),
+    radial-gradient(1.5px 1.5px at 8% 78%, rgba(140, 160, 175, 0.55), transparent),
+    radial-gradient(1px 1px at 18% 88%, rgba(150, 170, 185, 0.45), transparent),
+    radial-gradient(1px 1px at 82% 82%, rgba(140, 160, 175, 0.6), transparent),
+    radial-gradient(1.5px 1.5px at 92% 72%, rgba(150, 170, 185, 0.5), transparent),
+    radial-gradient(1px 1px at 45% 8%, rgba(160, 180, 195, 0.4), transparent),
+    radial-gradient(1px 1px at 55% 92%, rgba(140, 160, 175, 0.4), transparent);
+}
+
+/* ——— Decorations ——— */
+.deco {
+  position: absolute;
+  pointer-events: none;
+  z-index: 2;
+}
+
+.flower {
+  width: 28%;
+  height: auto;
+  opacity: 0.9;
+}
+
+.flower-tr {
+  top: -2%;
+  right: -4%;
+  view-transition-name: flor-tr;
+}
+
+.flower-bl {
+  bottom: -2%;
+  left: -4%;
+  view-transition-name: flor-bl;
+}
+
+.leaves {
+  width: 18%;
+  height: 55%;
+  opacity: 0.85;
+}
+
+.leaves-l {
+  left: 1%;
+  top: 22%;
+  view-transition-name: hojas-l;
+}
+
+.leaves-r {
+  right: 1%;
+  top: 22%;
+  view-transition-name: hojas-r;
+}
+
+.card[data-scene="venue"] .leaves-l {
+  top: 18%;
+  height: 62%;
+}
+
+.card[data-scene="venue"] .leaves-r {
+  top: 16%;
+  height: 64%;
+}
+
+.butterfly {
+  filter: drop-shadow(0 2px 4px rgba(90, 115, 132, 0.12));
+  transition: --rest-rot var(--vt-duration) var(--ease-out);
+}
+
+.b1 {
+  width: 22%;
+  top: 2%;
+  left: -2%;
+  --rest-rot: -12deg;
+  --tilt: 2.5deg;
+  --float-y: -5px;
+  transform: rotate(var(--rest-rot));
+  view-transition-name: mariposa-1;
+}
+
+.b2 {
+  width: 14%;
+  top: 1%;
+  left: 42%;
+  --rest-rot: 8deg;
+  --tilt: 2.5deg;
+  --float-y: -4px;
+  transform: rotate(var(--rest-rot));
+  view-transition-name: mariposa-2;
+}
+
+.b3 {
+  width: 16%;
+  top: 38%;
+  right: -3%;
+  --rest-rot: 18deg;
+  --tilt: -2.5deg;
+  --float-y: -5px;
+  transform: rotate(var(--rest-rot));
+  view-transition-name: mariposa-3;
+}
+
+.b4 {
+  width: 26%;
+  bottom: 4%;
+  right: -4%;
+  --rest-rot: -8deg;
+  --tilt: 2.5deg;
+  --float-y: -5px;
+  transform: rotate(var(--rest-rot));
+  view-transition-name: mariposa-4;
+}
+
+/* Venue butterfly positions — morph via View Transitions */
+.card[data-scene="venue"] .b1 {
+  top: 3%;
+  left: -3%;
+  width: 24%;
+  --rest-rot: -18deg;
+}
+
+.card[data-scene="venue"] .b2 {
+  top: 4%;
+  left: 48%;
+  width: 12%;
+  --rest-rot: 14deg;
+}
+
+.card[data-scene="venue"] .b3 {
+  top: 42%;
+  right: -5%;
+  width: 15%;
+  --rest-rot: 22deg;
+}
+
+.card[data-scene="venue"] .b4 {
+  bottom: 3%;
+  right: -5%;
+  width: 28%;
+  --rest-rot: -5deg;
+}
+
+/* ——— Content ——— */
+.content {
+  position: relative;
+  z-index: 5;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  padding: 11% 12% 10%;
+  text-align: center;
+}
+
+.title {
+  margin-top: 2.25rem;
+  font-family: "Great Vibes", cursive;
+  font-weight: 400;
+  font-size: clamp(2.2rem, 10vw, 3.1rem);
+  color: var(--ink);
+  line-height: 1.15;
+  letter-spacing: 0.02em;
+  white-space: nowrap;
+  view-transition-name: titulo;
+}
+
+.name {
+  margin-top: 0.35rem;
+  font-size: clamp(0.82rem, 3.4vw, 1.02rem);
+  font-weight: 500;
+  letter-spacing: 0.18em;
+  text-indent: 0.18em;
+  color: var(--ink);
+  view-transition-name: nombre;
+}
+
+.letter {
+  display: inline-block;
+  opacity: 0;
+  transform: translateY(0.55em);
+  animation: letter-in 0.7s var(--ease-out) forwards;
+  animation-delay: calc(0.35s + var(--i) * 0.045s);
+}
+
+.name .letter {
+  animation-delay: calc(0.85s + var(--i) * 0.06s);
+}
+
+@keyframes letter-in {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.panel {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  min-height: 0;
+  margin-top: -70px;
+}
+
+.panel[hidden] {
+  display: none !important;
+}
+
+.photo-wrap {
+  width: min(75%, 250px);
+  aspect-ratio: 1;
+  border-radius: 50%;
+  border: 3px solid var(--border-photo);
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(60, 80, 90, 0.12);
+  margin-top: 1.2rem;
+  view-transition-name: foto;
+  opacity: 0;
+  transform: scale(0.88);
+  animation: photo-in 0.9s var(--ease-out) 1.2s forwards;
+}
+
+.photo {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+}
+
+@keyframes photo-in {
+  to {
+    opacity: 1;
+    transform: scale(1);
+  }
+}
+
+.date {
+  margin-top: 1.4rem;
+  font-size: clamp(0.95rem, 4vw, 1.15rem);
+  letter-spacing: 0.28em;
+  text-indent: 0.28em;
+  color: var(--ink);
+  view-transition-name: fecha;
+  opacity: 0;
+  transform: translateY(12px);
+  animation: fade-up 0.7s var(--ease-out) 1.55s forwards;
+}
+
+/* Venue details */
+.panel-venue {
+  justify-content: flex-start;
+  gap: 4.15rem;
+  padding-top: 1.5rem;
+}
+
+.detail {
+  font-size: clamp(0.95rem, 4vw, 1.12rem);
+  letter-spacing: 0.06em;
+  line-height: 1.55;
+  color: var(--ink);
+  opacity: 0;
+  transform: translateY(18px);
+}
+
+.card[data-scene="venue"] .detail-time {
+  view-transition-name: hora;
+  animation: fade-up 0.65s var(--ease-out) 0.15s forwards;
+}
+
+.detail-address {
+  margin-top: 9rem;
+}
+
+.card[data-scene="venue"] .detail-address {
+  view-transition-name: direccion;
+  animation: fade-up 0.65s var(--ease-out) 0.28s forwards;
+}
+
+.detail-sobres {
+  position: absolute;
+  bottom: 15.2%;
+  left: 0;
+  right: 0;
+  z-index: 6;
+  margin: 0;
+  text-align: center;
+  font-size: clamp(0.82rem, 3.4vw, 0.95rem);
+  letter-spacing: 0.12em;
+  color: var(--ink-soft);
+  pointer-events: none;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.card[data-scene="venue"] .detail-sobres {
+  view-transition-name: sobres;
+  visibility: visible;
+  animation: fade-up 0.65s var(--ease-out) 0.35s forwards;
+}
+
+.card[data-scene="venue"] .detail-rsvp {
+  view-transition-name: rsvp;
+  margin-top: 0.5rem;
+  animation: fade-up 0.65s var(--ease-out) 0.42s forwards;
+}
+
+.rsvp {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 0.55rem;
+  width: 100%;
+  max-width: 240px;
+}
+
+.rsvp-label {
+  font-size: clamp(0.78rem, 3.2vw, 0.9rem);
+  letter-spacing: 0.14em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+}
+
+.rsvp-btn {
+  display: block;
+  width: 100%;
+  padding: 0.55rem 0.9rem;
+  font-family: inherit;
+  font-size: clamp(0.78rem, 3.2vw, 0.88rem);
+  letter-spacing: 0.08em;
+  text-align: center;
+  text-decoration: none;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--border-photo);
+  border-radius: 2px;
+  cursor: pointer;
+  user-select: none;
+  -webkit-tap-highlight-color: transparent;
+  transition: background-color 0.2s var(--ease-out), border-color 0.2s var(--ease-out);
+}
+
+.rsvp-btn:hover,
+.rsvp-btn:focus-visible {
+  background: rgba(155, 181, 166, 0.18);
+  border-color: var(--sage);
+  outline: none;
+}
+
+.rsvp-btn:active {
+  background: rgba(155, 181, 166, 0.28);
+}
+
+@keyframes fade-up {
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+/* Entrance for decorations on first load */
+.butterfly,
+.leaves,
+.flower {
+  opacity: 0;
+  animation: deco-in 1s var(--ease-out) forwards;
+}
+
+.b1 { animation-delay: 0.15s; --from-x: -40px; --from-y: -30px; --from-rot: -40deg; }
+.b2 { animation-delay: 0.28s; --from-x: 0; --from-y: -35px; --from-rot: 25deg; }
+.b3 { animation-delay: 0.4s; --from-x: 45px; --from-y: 10px; --from-rot: 40deg; }
+.b4 { animation-delay: 0.52s; --from-x: 50px; --from-y: 40px; --from-rot: -30deg; }
+.leaves-l { animation-delay: 0.2s; --from-x: -30px; --from-y: 20px; --from-rot: -8deg; }
+.leaves-r { animation-delay: 0.3s; --from-x: 30px; --from-y: 20px; --from-rot: 8deg; }
+.flower-tr { animation-delay: 0.18s; --from-x: 20px; --from-y: -20px; --from-rot: 10deg; }
+.flower-bl { animation-delay: 0.35s; --from-x: -20px; --from-y: 20px; --from-rot: -10deg; }
+
+@keyframes deco-in {
+  from {
+    opacity: 0;
+    transform: translate(var(--from-x, 0), var(--from-y, 0)) rotate(var(--from-rot, 0deg)) scale(0.85);
+  }
+  to {
+    opacity: 0.9;
+    transform: translate(0, 0) rotate(var(--rest-rot, 0deg)) scale(1);
+  }
+}
+
+/* After first entrance settles — keep decorations visible even if float pauses */
+.card.entered .butterfly {
+  opacity: 1;
+}
+
+.card.entered .leaves,
+.card.entered .flower {
+  animation: none;
+  opacity: 0.9;
+  transform: none;
+}
+
+.card.entered .leaves {
+  opacity: 0.85;
+}
+
+/* Soft float while ready (transform only) */
+.card.ready .b1 { animation: float-a 7.2s ease-in-out infinite; }
+.card.ready .b2 { animation: float-b 6.6s ease-in-out 0.4s infinite; }
+.card.ready .b3 { animation: float-c 7s ease-in-out 0.8s infinite; }
+.card.ready .b4 { animation: float-d 7.8s ease-in-out 0.2s infinite; }
+
+@keyframes float-a {
+  0%, 100% { transform: translateY(0) rotate(var(--rest-rot)); }
+  50% { transform: translateY(var(--float-y)) rotate(calc(var(--rest-rot) + var(--tilt))); }
+}
+
+@keyframes float-b {
+  0%, 100% { transform: translateY(0) rotate(var(--rest-rot)); }
+  50% { transform: translateY(var(--float-y)) rotate(calc(var(--rest-rot) + var(--tilt))); }
+}
+
+@keyframes float-c {
+  0%, 100% { transform: translateY(0) rotate(var(--rest-rot)); }
+  50% { transform: translateY(var(--float-y)) rotate(calc(var(--rest-rot) + var(--tilt))); }
+}
+
+@keyframes float-d {
+  0%, 100% { transform: translateY(0) rotate(var(--rest-rot)); }
+  50% { transform: translateY(var(--float-y)) rotate(calc(var(--rest-rot) + var(--tilt))); }
+}
+
+.hint {
+  position: absolute;
+  bottom: 3.5%;
+  left: 0;
+  right: 0;
+  z-index: 6;
+  text-align: center;
+  font-size: 0.68rem;
+  letter-spacing: 0.18em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  opacity: 0;
+  animation: hint-pulse 2.4s ease-in-out 2.2s infinite;
+}
+
+.card[data-scene="venue"] #hint {
+  animation: none;
+  opacity: 0.45;
+}
+
+@keyframes hint-pulse {
+  0%, 100% { opacity: 0.35; }
+  50% { opacity: 0.7; }
+}
+
+/* ——— View Transition API ——— */
+::view-transition-old(root),
+::view-transition-new(root) {
+  animation: none;
+  mix-blend-mode: normal;
+}
+
+::view-transition-group(*) {
+  animation-duration: var(--vt-duration);
+  animation-timing-function: var(--ease-out);
+}
+
+::view-transition-old(foto),
+::view-transition-old(fecha) {
+  animation: vt-fade-scale-out var(--vt-duration) var(--ease-out) both;
+}
+
+::view-transition-new(hora),
+::view-transition-new(direccion),
+::view-transition-new(sobres),
+::view-transition-new(rsvp) {
+  animation: vt-fade-up-in var(--vt-duration) var(--ease-out) both;
+}
+
+::view-transition-old(hora),
+::view-transition-old(direccion),
+::view-transition-old(sobres),
+::view-transition-old(rsvp) {
+  animation: vt-fade-up-out var(--vt-duration) var(--ease-out) both;
+}
+
+::view-transition-new(foto),
+::view-transition-new(fecha) {
+  animation: vt-fade-scale-in var(--vt-duration) var(--ease-out) both;
+}
+
+@keyframes vt-fade-scale-out {
+  to {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+}
+
+@keyframes vt-fade-scale-in {
+  from {
+    opacity: 0;
+    transform: scale(0.85);
+  }
+}
+
+@keyframes vt-fade-up-in {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+}
+
+@keyframes vt-fade-up-out {
+  to {
+    opacity: 0;
+    transform: translateY(-16px);
+  }
+}
+
+/* Fallback crossfade when VT unsupported */
+.card.fallback-out .panel-cover {
+  animation: fade-out-panel 0.45s var(--ease-out) forwards;
+}
+
+.card.fallback-in .panel-venue {
+  animation: fade-in-panel 0.5s var(--ease-out) forwards;
+}
+
+.card.fallback-out-venue .panel-venue {
+  animation: fade-out-panel 0.45s var(--ease-out) forwards;
+}
+
+.card.fallback-in-cover .panel-cover {
+  animation: fade-in-panel 0.5s var(--ease-out) forwards;
+}
+
+@keyframes fade-out-panel {
+  to { opacity: 0; transform: scale(0.94); }
+}
+
+@keyframes fade-in-panel {
+  from { opacity: 0; transform: translateY(16px); }
+  to { opacity: 1; transform: none; }
+}
+
+/* Reduced motion */
+@media (prefers-reduced-motion: reduce) {
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.01ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.01ms !important;
+  }
+
+  .letter,
+  .photo-wrap,
+  .date,
+  .detail,
+  .butterfly,
+  .leaves,
+  .flower,
+  .hint {
+    opacity: 1 !important;
+    transform: none !important;
+  }
+
+  ::view-transition-group(*) {
+    animation-duration: 0.01ms !important;
+  }
+}
+
+@media (max-height: 700px) {
+  .content {
+    padding-top: 9%;
+    padding-bottom: 8%;
+  }
+
+  .title {
+    margin-top: 0.85rem;
+  }
+
+  .photo-wrap {
+    width: min(48%, 190px);
+    margin-top: 0.7rem;
+  }
+
+  .date {
+    margin-top: 0.9rem;
+  }
+
+  .panel-venue {
+    gap: 0.85rem;
+    padding-top: 1rem;
+  }
+}
