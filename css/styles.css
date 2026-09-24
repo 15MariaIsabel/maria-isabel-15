@@ -289,7 +289,7 @@ body {
   margin-top: 2.25rem;
   font-family: "Great Vibes", cursive;
   font-weight: 400;
-  font-size: clamp(2.2rem, 10vw, 3.1rem);
+  font-size: clamp(2.2rem, 12vw, 3.1rem);
   color: var(--ink);
   line-height: 1.15;
   letter-spacing: 0.02em;
@@ -299,7 +299,7 @@ body {
 
 .name {
   margin-top: 0.35rem;
-  font-size: clamp(0.82rem, 3.4vw, 1.02rem);
+  font-size: clamp(0.82rem, 4.4vw, 1.02rem);
   font-weight: 500;
   letter-spacing: 0.18em;
   text-indent: 0.18em;
@@ -342,7 +342,7 @@ body {
 }
 
 .photo-wrap {
-  width: min(75%, 250px);
+  width: min(85%, 285px);
   aspect-ratio: 1;
   border-radius: 50%;
   border: 3px solid var(--border-photo);
@@ -371,7 +371,7 @@ body {
 
 .date {
   margin-top: 1.4rem;
-  font-size: clamp(0.95rem, 4vw, 1.15rem);
+  font-size: clamp(0.95rem, 5vw, 1.15rem);
   letter-spacing: 0.28em;
   text-indent: 0.28em;
   color: var(--ink);
