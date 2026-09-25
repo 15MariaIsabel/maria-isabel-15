@@ -462,6 +462,45 @@ body {
   color: var(--ink-soft);
 }
 
+.rsvp-guests {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 0.6rem;
+  width: 100%;
+  font-size: clamp(0.72rem, 3vw, 0.82rem);
+  letter-spacing: 0.1em;
+  text-transform: uppercase;
+  color: var(--ink-soft);
+  cursor: text;
+}
+
+.rsvp-guests-input {
+  width: 3.2rem;
+  padding: 0.35rem 0.3rem;
+  font-family: inherit;
+  font-size: clamp(0.85rem, 3.4vw, 0.95rem);
+  letter-spacing: 0.04em;
+  text-align: center;
+  color: var(--ink);
+  background: transparent;
+  border: 1px solid var(--border-photo);
+  border-radius: 2px;
+  -moz-appearance: textfield;
+  appearance: textfield;
+}
+
+.rsvp-guests-input::-webkit-outer-spin-button,
+.rsvp-guests-input::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+}
+
+.rsvp-guests-input:focus-visible {
+  border-color: var(--sage);
+  outline: none;
+}
+
 .rsvp-btn {
   display: block;
   width: 100%;

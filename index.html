@@ -149,15 +149,31 @@
           <p class="detail detail-address" id="detail-address">Mar y Cielo <br> Santander de Quilichao <br> 7:00 P.M.</p>
           <div class="detail detail-rsvp rsvp" id="detail-rsvp">
             <p class="rsvp-label">Confirmar asistencia</p>
+            <label class="rsvp-guests" for="guest-count">
+              <span class="rsvp-guests-text">Nº de invitados</span>
+              <input
+                type="number"
+                id="guest-count"
+                class="rsvp-guests-input"
+                min="1"
+                max="20"
+                value="1"
+                inputmode="numeric"
+                aria-label="Número de invitados"
+                readonly
+              />
+            </label>
             <a
               class="rsvp-btn"
-              href="https://wa.me/573113664973?text=%C2%A1Hola!%20Confirmo%20con%20mucho%20gusto%20mi%20asistencia%20a%20los%20XV%20a%C3%B1os%20de%20Maria%20Isabel.%20%C2%A1Muchas%20gracias%20por%20la%20invitaci%C3%B3n!"
+              href="https://wa.me/573113664973"
+              data-phone="573113664973"
               target="_blank"
               rel="noopener noreferrer"
             >Confirmar con papá</a>
             <a
               class="rsvp-btn"
-              href="https://wa.me/573217393512?text=%C2%A1Hola!%20Confirmo%20con%20mucho%20gusto%20mi%20asistencia%20a%20los%20XV%20a%C3%B1os%20de%20Maria%20Isabel.%20%C2%A1Muchas%20gracias%20por%20la%20invitaci%C3%B3n!"
+              href="https://wa.me/573217393512"
+              data-phone="573217393512"
               target="_blank"
               rel="noopener noreferrer"
             >Confirmar con mamá</a>

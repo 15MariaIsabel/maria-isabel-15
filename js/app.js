@@ -85,8 +85,39 @@
     }
   }
 
+  const guestInput = document.getElementById("guest-count");
+
+  const guestsFromUrl = Number.parseInt(
+    new URLSearchParams(window.location.search).get("invitados"),
+    10
+  );
+  if (guestInput && Number.isFinite(guestsFromUrl) && guestsFromUrl >= 1) {
+    guestInput.value = String(Math.min(guestsFromUrl, 20));
+  }
+
+  function buildWhatsAppUrl(phone) {
+    let guests = Number.parseInt(guestInput?.value, 10);
+    if (!Number.isFinite(guests) || guests < 1) guests = 1;
+    if (guests > 20) guests = 20;
+    if (guestInput) guestInput.value = String(guests);
+
+    const noun = guests === 1 ? "invitado" : "invitados";
+    const message =
+      `¡Hola! Confirmo con mucho gusto mi asistencia a los XV años de Maria Isabel. ` +
+      `Seremos ${guests} ${noun}. ¡Muchas gracias por la invitación!`;
+
+    return `https://wa.me/${phone}?text=${encodeURIComponent(message)}`;
+  }
+
   card.addEventListener("click", (e) => {
-    if (e.target.closest(".rsvp-btn")) {
+    const rsvpBtn = e.target.closest(".rsvp-btn");
+    if (rsvpBtn) {
+      e.stopPropagation();
+      const phone = rsvpBtn.dataset.phone;
+      if (phone) rsvpBtn.href = buildWhatsAppUrl(phone);
+      return;
+    }
+    if (e.target.closest(".rsvp-guests")) {
       e.stopPropagation();
       return;
     }
@@ -94,6 +125,7 @@
   });
 
   card.addEventListener("keydown", (e) => {
+    if (e.target.closest(".rsvp-guests-input")) return;
     if (e.key === "Enter" || e.key === " ") {
       e.preventDefault();
       toggleScene();
